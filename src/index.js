@@ -9,8 +9,7 @@ const DB_UMG = require("./baseDeDatos");
 const app = express();
 
 app.use(function (req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // Es lo mismo que la configuracion de CORS de abajo
-    // res.header("Access-Control-Allow-Origin", "https://l5kbp6rc-3000.use2.devtunnels.ms"); // Es lo mismo que la configuracion de CORS de abajo
+    res.header("Access-Control-Allow-Origin", "https://proyecto-2-pi.vercel.app"); // Es lo mismo que la configuracion de CORS de abajo
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
     res.header("Access-Control-Allow-Headers", "Content-Type, x-access-token");
     res.header("Access-Control-Allow-Credentials", "true");
