@@ -49,7 +49,7 @@ router.post("/api/carrito/add", verificaToken, async (req, res) => {
     }
 });
 
-router.delete("/api/carrito", verificaToken, async (req, res) => {
+router.delete("/api/carrito/:id", verificaToken, async (req, res) => {
     const user = req.tokenD;
     try {
         const identificador = req.params.id;
