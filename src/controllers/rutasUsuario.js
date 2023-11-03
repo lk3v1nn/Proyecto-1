@@ -75,25 +75,12 @@ router.post("/api/login", async (req, res) => {
             expiresIn: 60 * 60 * 24 * 30,
         });
         res.cookie("token", token, {
-            httpOnly: false,
-            secure: false,
-            maxAge: 60 * 60 * 24 * 30,
-            path: "/",
+            httpOnly: true,
+            sameSite: "none", // O 'lax' dependiendo de tus necesidades
+            secure: true, // Solo si estás usando HTTPS
         });
-        res.cookie('miCookie', 'valorDeLaCookie', { 
-            httpOnly: true, 
-            sameSite: 'strict', 
-            secure: true 
-          });
-          res.cookie('miCookie2', 'valorDeLaCookie', { 
-            httpOnly: true, 
-            sameSite: 'none', // O 'lax' dependiendo de tus necesidades
-            secure: true // Solo si estás usando HTTPS
-          });
 
         res.send("Sesion iniciada correctamente.");
-
-    //    res.cookie("token", token).json({ ok: 'sesion iniciada' });
     } catch (error) {
         res.status(500).json({ Error: "Error del servidor" });
     }
@@ -125,11 +112,9 @@ router.post("/api/perfil/:DPI", verificaToken, async (req, res) => {
             req.tokenD
         )
     ) {
-        return res
-            .status(400)
-            .json({
-                Error: "El Correo electronico ya existe para otro usuario",
-            });
+        return res.status(400).json({
+            Error: "El Correo electronico ya existe para otro usuario",
+        });
     }
 
     await bdUsuarios.updateOne({ _id: req.tokenD }, objetoUsuario);
@@ -144,11 +129,9 @@ router.delete("/api/perfil/:DPI", verificaToken, async (req, res) => {
         CorreoElectronico,
     });
     if (!credencialesValidas) {
-        return res
-            .status(400)
-            .json({
-                Error: "Ingrese la clave y correo correcta para eliminar el usuario",
-            });
+        return res.status(400).json({
+            Error: "Ingrese la clave y correo correcta para eliminar el usuario",
+        });
     }
     await bdUsuarios.deleteOne({ Clave, CorreoElectronico });
     res.status(200).json({
