@@ -52,7 +52,7 @@ router.post("/api/carrito/add", verificaToken, async (req, res) => {
 router.delete("/api/carrito", verificaToken, async (req, res) => {
     const user = req.tokenD;
     try {
-        const identificador = req.body.identificador;
+        const identificador = req.params.id;
         if (!producto) {
             return res.json({ Error: "datos incompletos" });
         }
