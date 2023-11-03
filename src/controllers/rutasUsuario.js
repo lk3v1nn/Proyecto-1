@@ -7,7 +7,7 @@ const verificaToken = require("../verificaToken");
 const router = Router();
 
 //RUTA DE REGISTRO DE USUARIOS
-router.post("/api/registro/:DPI", async (req, res) => {
+router.post("/api/registro", async (req, res) => {
     //GUARDO LOS DATOS EN VARIABLES
     const {
         Nombres,
