@@ -1,4 +1,5 @@
 const express = require ('express')
+const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const rutasUsuario = require('./controllers/rutasUsuario')
 const rutasProducto = require('./controllers/rutasProducto')
@@ -8,15 +9,22 @@ const DB_UMG = require("./baseDeDatos");
 
 const app = express();
 
-app.use(function (req, res, next) {
-  res.setHeader('Access-Control-Allow-Origin', 'https://proyecto-2-pi.vercel.app');
-    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-    res.header("Access-Control-Allow-Headers", "Content-Type, x-access-token");
-  res.header("Access-Control-Allow-Credentials", "true");
+app.use(cors({
+    origin: 'https://proyecto-2-pi.vercel.app', // Reemplaza con la URL de tu frontend en Vercel
+    credentials: true,
+  }));
+
+app.use(cookieParser());
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Credentials', 'true');
+  res.header('Access-Control-Allow-Origin', 'https://proyecto-2-pi.vercel.app'); // Reemplaza con la URL de tu frontend en Vercel
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Set-Cookie');
   next();
 });
 
-app.use(cookieParser());
+
 app.use(express.json());
 app.use(rutasUsuario);
 app.use(rutasProducto);
