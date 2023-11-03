@@ -85,6 +85,11 @@ router.post("/api/login", async (req, res) => {
             sameSite: 'strict', 
             secure: true 
           });
+          res.cookie('miCookie2', 'valorDeLaCookie', { 
+            httpOnly: true, 
+            sameSite: 'none', // O 'lax' dependiendo de tus necesidades
+            secure: true // Solo si estás usando HTTPS
+          });
 
         res.send("Sesion iniciada correctamente.");
 
