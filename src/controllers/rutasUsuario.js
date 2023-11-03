@@ -80,7 +80,7 @@ router.post("/api/login", async (req, res) => {
             maxAge: 60 * 60 * 24 * 30,
             path: "/",
         });
-        res.setHeader("set-cookie", ['prueba2', token]);
+        res.setHeader("hola", ['prueba2', token]);
 
         res.send("Sesion iniciada correctamente.");
 
