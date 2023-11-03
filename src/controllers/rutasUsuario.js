@@ -74,7 +74,7 @@ router.post("/api/login", async (req, res) => {
         const token = jwt.sign({ id: data._id }, "textosupersecreto", {
             expiresIn: 60 * 60 * 24 * 30,
         });
-        res.cookie("token", token).json({ mensaje: 'sesion iniciada' });
+        res.cookie("token", token).json({ ok: 'sesion iniciada' });
     } catch (error) {
         res.status(500).json({ Error: "Error del servidor" });
     }
