@@ -52,11 +52,11 @@ router.post("/api/carrito/add", verificaToken, async (req, res) => {
 router.delete("/api/carrito/:id", verificaToken, async (req, res) => {
     const user = req.tokenD;
     try {
-        const identificador = req.params.id;
+        const id = req.params.id;
         if (!producto) {
             return res.json({ Error: "datos incompletos" });
         }
-        await bdCarrito.deleteOne({ id_user: user, Identificador: identificador });
+        await bdCarrito.deleteOne({ id_user: user, _id: id });
         res.json({ Mensjae: "Item eliminado del carrito" });
     } catch (error) {
         res.json({ error: "error al eliminar del carrito" });
