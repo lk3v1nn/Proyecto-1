@@ -24,7 +24,7 @@ app.use(rutasCarrito);
 app.use(rutasCompra);
 
 app.get('/', (req, res)=>{
-    res.send(req.cookies);
+    res.json('su cookie': req.cookies);
     // res.cookie('cookie_name', 'cookie_value').send('esta respondiendo');
 })
 
