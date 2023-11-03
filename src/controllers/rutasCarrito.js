@@ -3,6 +3,7 @@ const router = Router();
 const verificaToken = require("../verificaToken");
 const bdCarrito = require("../models/carrito");
 
+
 router.get("/api/carrito", verificaToken, async (req, res) => {
     const data = await bdCarrito.find({ id_user: req.tokenD });
     res.json(data);
@@ -53,10 +54,10 @@ router.delete("/api/carrito/:id", verificaToken, async (req, res) => {
     const user = req.tokenD;
     try {
         const id = req.params.id;
-        if (!producto) {
+        if (!id) {
             return res.json({ Error: "datos incompletos" });
         }
-        await bdCarrito.deleteOne({ id_user: user, _id: id });
+        await bdCarrito.deleteOne({ id_user: user, _id : id });
         res.json({ Mensjae: "Item eliminado del carrito" });
     } catch (error) {
         res.json({ error: "error al eliminar del carrito" });
